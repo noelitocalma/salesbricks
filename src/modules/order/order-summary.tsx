@@ -61,16 +61,18 @@ export default function OrderSummary() {
       </div>
       <hr className="my-2" />
 
-      {addOns.map(addOn => (
-        <>
+      {addOns.map(addOn => {
+        const totalAddOnPrice = (addOn.price * addOn.quantity)?.toFixed(3);
+
+        return (<>
           <div className="grid gap-2">
             <Detail title="Read/write users" value={addOn?.quantity ?? ''} />
             <Detail title="API " value={addOn?.name ?? ''} />
-            <Detail title="Price" value={`${addOn.currency}${(addOn.price * addOn.quantity)?.toFixed(3)}`} />
+            <Detail title="Price" value={`${addOn.currency}${totalAddOnPrice}`} />
           </div>
           <hr className="my-2" />
-        </>
-      ))}
+        </>)
+      })}
 
       <Detail title="Total Price" value={`$${totalPrice}`} />
 
